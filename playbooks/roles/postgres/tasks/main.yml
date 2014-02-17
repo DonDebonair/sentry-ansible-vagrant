@@ -19,7 +19,7 @@
 
 # Aparently RedHat-family OSes don't automatically initialize DB cluster...
 - name: init postgresql database
-  command: creates=/var/lib/pgsql/data/ service postgresql initdb 
+  command: service postgresql initdb creates=/var/lib/pgsql/data/postgresql.conf
   when: ansible_os_family == "RedHat"
 
 # ...nor do they install themselves as starting at boot time

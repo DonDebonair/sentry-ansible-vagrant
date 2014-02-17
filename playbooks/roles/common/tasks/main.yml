@@ -29,3 +29,6 @@
     - supervisor
   when: ansible_os_family == "RedHat"
 
+- name: start supervisor
+  service: name=supervisord state=started enabled=yes
+  when: ansible_os_family == "RedHat"
