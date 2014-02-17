@@ -1,0 +1,16 @@
+- name: update apt package cache
+  apt: update_cache=yes
+  when: ansible_os_family == "Debian"
+
+- name: install common packages debian/ubuntu
+  apt: pkg={{ item }} state=latest
+  with_items:
+    - supervisor
+  when: ansible_os_family == "Debian"
+
+- name: install common packages redhat/centos
+  yum: pkg={{ item }} state=latest
+  with_items:
+    - supervisor
+  when: ansible_os_family == "RedHat"
+

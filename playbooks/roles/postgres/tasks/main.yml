@@ -1,0 +1,39 @@
+- name: install postgresql packages debian/ubuntu
+  apt: pkg={{ item }} state=latest
+  with_items:
+    - postgresql
+    - postgresql-contrib
+    - postgresql-client
+    - libpq-dev
+  when: ansible_os_family == "Debian"
+
+- name: install postgresql packages redhat/centos
+  yum: pkg={{ item }} state=latest
+  with_items:
+    - postgresql
+    - postgresql-contrib
+    - postgresql-client
+    - libpq-dev
+  when: ansible_os_family == "RedHat"
+
+- name: install postgresql python bindings
+  pip: name=psycopg2
+
+- name: setup database
+  sudo_user: postgres
+  postgresql_db:
+    db: "{{ db_name }}"
+    encoding: 'UTF-8'
+    lc_collate: 'en_US.UTF-8'
+    lc_ctype: 'en_US.UTF-8'
+    template: 'template0'
+    state: present
+
+- name: grant access for database to user
+  sudo_user: postgres
+  postgresql_user:
+    db: "{{ db_name }}"
+    user: "{{ db_user }}"
+    password: "{{ db_password }}"
+    role_attr_flags: "CREATEDB,SUPERUSER"
+    state: present
