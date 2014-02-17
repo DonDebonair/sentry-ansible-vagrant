@@ -1,7 +1,6 @@
 - name: install python-related packages debian/ubuntu
   apt: pkg={{ item }} state=latest
   with_items:
-    - build-essential
     - python
     - python-dev
     - python-setuptools
@@ -10,9 +9,8 @@
 - name: install python-related packages redhat/centos
   yum: pkg={{ item }} state=latest
   with_items:
-    - build-essential
     - python
-    - python-dev
+    - python-devel
     - python-setuptools
   when: ansible_os_family == "RedHat"
 

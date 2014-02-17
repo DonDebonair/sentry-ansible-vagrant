@@ -11,9 +11,32 @@
   yum: pkg={{ item }} state=latest
   with_items:
     - postgresql
+    - postgresql-server
     - postgresql-contrib
-    - postgresql-client
-    - libpq-dev
+    - postgresql-libs
+    - postgresql-devel
+  when: ansible_os_family == "RedHat"
+
+# Aparently RedHat-family OSes don't automatically initialize DB cluster...
+- name: init postgresql database
+  command: creates=/var/lib/pgsql/data/ service postgresql initdb 
+  when: ansible_os_family == "RedHat"
+
+# ...nor do they install themselves as starting at boot time
+- name: ensure postgresql is running automatically at boot time
+  command: chkconfig postgresql on
+  when: ansible_os_family == "RedHat"
+
+# ... or start at all, for that matter
+- name: start postgresql service
+  service: name=postgresql state=started
+  when: ansible_os_family == "RedHat"
+
+# And on top of that, authentication is configured as ident instead of md5
+- name: copy pg_hba.conf
+  copy: src=pg_hba.conf dest=/var/lib/pgsql/data/pg_hba.conf backup=on      
+  notify:
+    - restart postgresql
   when: ansible_os_family == "RedHat"
 
 - name: install postgresql python bindings

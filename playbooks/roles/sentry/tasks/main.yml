@@ -33,6 +33,19 @@
   notify:
     - restart nginx
 
+# RedHat-family OSes don't have a conf.d dir for Supervisor, so we need to provide it
+- name: ensure supervisor conf.d directory exists
+  file:
+    path: /etc/supervisor/conf.d
+    state: directory
+  when: ansible_os_family == "RedHat"
+
+- name: Copy supervisor global configuration
+  template: src=supervisord.conf.j2 dest=/etc/supervisord.conf
+  notify: 
+    - reload supervisor
+  when: ansible_os_family == "RedHat"
+
 - name: Copy supervisor configuration for sentry
   template: src=supervisor-sentry.conf.j2 dest=/etc/supervisor/conf.d/sentry.conf
   notify: 
