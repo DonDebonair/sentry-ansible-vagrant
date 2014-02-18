@@ -27,16 +27,16 @@
   command: chkconfig postgresql on
   when: ansible_os_family == "RedHat"
 
-# ... or start at all, for that matter
-- name: start postgresql service
-  service: name=postgresql state=started
-  when: ansible_os_family == "RedHat"
-
 # And on top of that, authentication is configured as ident instead of md5
 - name: copy pg_hba.conf
   copy: src=pg_hba.conf dest=/var/lib/pgsql/data/pg_hba.conf backup=on      
   notify:
     - restart postgresql
+  when: ansible_os_family == "RedHat"
+
+# Start PostgreSQL. This could/should be done as a notify, but somehow that doesn't properly happen... (TODO)
+- name: start postgresql service
+  service: name=postgresql state=started
   when: ansible_os_family == "RedHat"
 
 - name: install postgresql python bindings
