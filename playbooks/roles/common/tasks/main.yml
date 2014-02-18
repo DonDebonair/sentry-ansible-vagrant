@@ -18,7 +18,6 @@
   apt: pkg={{ item }} state=latest
   with_items:
     - build-essential
-    - supervisor
   when: ansible_os_family == "Debian"
 
 # @development is a groupinstall, see https://coderwall.com/p/k6goya
@@ -26,9 +25,5 @@
   yum: pkg={{ item }} state=latest
   with_items:
     - '@development'
-    - supervisor
   when: ansible_os_family == "RedHat"
 
-- name: start supervisor
-  service: name=supervisord state=started enabled=yes
-  when: ansible_os_family == "RedHat"

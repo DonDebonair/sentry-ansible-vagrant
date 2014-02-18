@@ -12,6 +12,7 @@
   roles:
     - common
     - python
+    - supervisor
     - role: nginx
       nginx_sites: none
     - postgres
