@@ -15,7 +15,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     sentry.vm.network :private_network, ip: "192.168.33.10"
 
     sentry.vm.provision "ansible" do |ansible| 
-      ansible.playbook = "playbooks/sentry.yml"
+      ansible.playbook = "sentry.yml"
       ansible.verbose = 'vvv'
     end 
   end

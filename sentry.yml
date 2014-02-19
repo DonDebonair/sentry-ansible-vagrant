@@ -1,4 +1,4 @@
-- hosts: sentry
+- hosts: all
   sudo: True
   vars:
     db_name: sentry
