@@ -10,9 +10,9 @@ DATABASES = {
         # to ``django.db.backends.mysql`` or to PostgreSQL with
         # ``django.db.backends.postgresql_psycopg2``
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': '{{ db_name }}',
-        'USER': '{{ db_user }}',
-        'PASSWORD': '{{ db_password }}',
+        'NAME': '{{ db_sentry.name }}',
+        'USER': '{{ db_sentry.user }}',
+        'PASSWORD': '{{ db_sentry.password }}',
         'HOST': 'localhost',
         'PORT': '',
     }
@@ -26,7 +26,7 @@ SENTRY_PUBLIC = False
 SENTRY_WEB_HOST = '0.0.0.0'
 SENTRY_WEB_PORT = 9000
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['{{ sentry.server }}']
 
-SENTRY_URL_PREFIX = '{{ sentry_url }}'
-SENTRY_LOGIN_URL = '{{ sentry_url }}/login/'
+SENTRY_URL_PREFIX = '{{ sentry.url }}'
+SENTRY_LOGIN_URL = '{{ sentry.url }}/login/'

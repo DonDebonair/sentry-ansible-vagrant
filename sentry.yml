@@ -1,14 +1,17 @@
 - hosts: all
   sudo: True
   vars:
-    db_name: sentry
-    db_user: sentry
-    db_password: sentry
-    sentry_server: sentry.local
-    sentry_url: http://sentry.local
-    superuser_username: admin
-    superuser_email: admin@example.com
-    superuser_password: admin
+    db_sentry:
+      name: sentry
+      user: sentry
+      password: sentry
+    superuser_sentry:
+      username: admin
+      email: admin@example.com
+      password: admin
+    sentry:
+      server: sentry.local
+      url: http://sentry.local
   roles:
     - common
     - python

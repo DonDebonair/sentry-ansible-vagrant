@@ -1,6 +1,6 @@
 server {
     listen 80;
-    server_name {{ sentry_server }};
+    server_name {{ sentry.server }};
 
     location / {
         proxy_pass         http://localhost:9000;
