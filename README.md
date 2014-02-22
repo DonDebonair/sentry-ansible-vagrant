@@ -25,11 +25,11 @@ $ vagrant up
 
 ## Different OSes
 
-By default, the Vagrant box runs Debian 7, but the playbook supports Ubuntu 12.04 and CentOS 6.4 as well! To try those out, uncomment the appropriate lines in the Vagrantfile and comment out the Debian lines.
+By default, the Vagrant box runs Ubuntu 12.04, but the playbook supports Debian 7 and CentOS 6.4 as well! To try those out, uncomment the appropriate lines in the Vagrantfile and comment out the Debian lines.
 
 ## Using the playbook standalone
 
-You can of course also use the playbook without Vagrant. In that case you must provide your own inventory file specifying the host on which to install Sentry.
+You can of course also use the playbook without Vagrant. In that case you must provide your own inventory file specifying the host on which to install Sentry. The playbook has been tested on Ubuntu 12.04, Debian 7 and CentOS 6.4. Other flavors of Linux might work as well.
 
 ## Known issues / TODO
 
