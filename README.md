@@ -31,6 +31,10 @@ By default, the Vagrant box runs Ubuntu 12.04, but the playbook supports Debian 
 
 You can of course also use the playbook without Vagrant. In that case you must provide your own inventory file specifying the host on which to install Sentry. The playbook has been tested on Ubuntu 12.04, Debian 7 and CentOS 6.4. Other flavors of Linux might work as well.
 
+## Secret key
+
+On production environments you will want to set the ``secret_key`` setting under the ``sentry`` namespace to a unique key that acts as a signing token. Generate a secret key for [here](http://www.miniwebtool.com/django-secret-key-generator/)
+
 ## Sending mail
 
 There's currently no Mail Transfer Agent being installed, like `postfix`. To enable sending mails anyways, you can use an external mail service that supports sending mail through SMTP. One such service is [Mailgun](http://www.mailgun.com), which allows sending up to 10,000 mails per month for free. To enable mail for sentry, you can edit your Sentry config (`/var/sentry/sentry_conf.py`) and add these variables:

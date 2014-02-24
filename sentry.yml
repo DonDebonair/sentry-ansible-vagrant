@@ -12,6 +12,7 @@
     sentry:
       server: sentry.local
       url: http://sentry.local
+      secret_key: 'my69eAMYjzqtmfaRJ107MeXCYDTaxQdNZPr8YOf/zOV5pIUoZa5biA=='
   roles:
     - common
     - python
