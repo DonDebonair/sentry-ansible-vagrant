@@ -54,3 +54,7 @@ SERVER_EMAIL = 'EMAIL ADDRESS MAILS SHOULD ORIGINATE FROM' # eg. sentry@mysentry
 * Unlike the [Puppet version](https://github.com/DandyDev/sentry-vagrant), this version does not require any manual steps. The one major drawback is that it's not completely idempotent. If you run it twice, the creation of the superuser will throw an error because it already exists.
 * This hasn't been tested on other Providers than VirtualBox yet
 * On CentOS, the firewall is completely closed by default (at least on the box I tried it with). So you have to manually open the relevant port (80) using `iptables`, or if you're not concerned about security (because you're running it locally through Vagrant), you can always flush the firewall with `iptables -F`.
+
+## Contribute
+
+If you have any suggestions, feel free to create an issue here on Github and/or fork this repo, make changes and submit a pull request!
