@@ -11,7 +11,7 @@ What gets installed:
 
 ## Let's get rolling!
 
-If you want to install Sentry on a VM using Vagrant, you first need to install [Vagrant](http://www.vagrantup.com/) and a Virtual Machine provider of choice ([VirtualBox](https://www.virtualbox.org/) is free and works out of the box with Vagrant).
+If you want to install Sentry on a VM using Vagrant, you first need to install [Vagrant](http://www.vagrantup.com/) and a Virtual Machine provider of choice ([VirtualBox](https://www.virtualbox.org/) is free and works out of the box with Vagrant). You also need to [install Ansible](http://docs.ansible.com/intro_installation.html).
 
 You can configure your install by modifying the variables in the _sentry.yml_ file before provisioning.
 
