@@ -23,6 +23,12 @@ $ cd /path/to/sentry-ansible-vagrant
 $ vagrant up
 ```
 
+In order to properly access Sentry by its configured hostname (`sentry.server` in the sentry.yml), you have to add this hostname to your hostsfile. On POSIX systems (Linx & OS X), you can add it by doing:
+
+```
+$ sudo echo "<servername> 192.168.33.10" >> /etc/hosts
+```
+
 ## Different OSes
 
 By default, the Vagrant box runs Ubuntu 12.04, but the playbook supports Debian 7 and CentOS 6.4 as well! To try those out, uncomment the appropriate lines in the Vagrantfile and comment out the Debian lines.
