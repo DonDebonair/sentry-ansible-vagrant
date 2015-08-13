@@ -10,7 +10,13 @@
     name: sentry[postgres]
     virtualenv: /var/sentry/ve
     virtualenv_site_packages: no
-
+    
+- name: install memcached
+  pip:
+    name: python-memcached
+    virtualenv: /var/sentry/ve
+    virtualenv_site_packages: no
+    
 - name: Copy sentry configuration
   template: src=sentry_conf.py.j2 dest=/var/sentry/sentry_conf.py
   notify: restart nginx
