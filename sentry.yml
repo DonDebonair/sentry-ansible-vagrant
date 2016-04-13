@@ -4,15 +4,15 @@
     db_sentry:
       name: sentry
       user: sentry
-      password: sentry
+      password: redacted
     superuser_sentry:
       username: admin
-      email: admin@example.com
-      password: admin
+      email: redacted
+      password: redacted
     sentry:
-      server: sentry.local
-      url: http://sentry.local
-      secret_key: 'my69eAMYjzqtmfaRJ107MeXCYDTaxQdNZPr8YOf/zOV5pIUoZa5biA=='
+      server: redacted
+      url: redacted
+      secret_key: 'redacted'
   roles:
     - common
     - python
