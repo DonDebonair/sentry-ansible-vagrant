@@ -28,6 +28,11 @@ You also need to [install Ansible](http://docs.ansible.com/intro_installation.ht
 You can configure your install by modifying the variables in the `sentry.yml`
 file before provisioning.
 
+Note that postgresql may fail to install correctly unless you specify a
+compatible locale. 
+See https://github.com/ansible/ansible/issues/10698 for some background
+(ansible forwards the local environment unless you stop it).
+
 Then: 
 
 ```
