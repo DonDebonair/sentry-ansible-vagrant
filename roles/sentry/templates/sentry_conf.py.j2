@@ -23,21 +23,23 @@ SENTRY_KEY = '{{ sentry.secret_key }}'
 # Set this to false to require authentication
 SENTRY_PUBLIC = False
 
-SENTRY_ALLOW_REGISTRATION = False
+SENTRY_FEATURES['auth:register'] = False
 
 SENTRY_WEB_HOST = '0.0.0.0'
 SENTRY_WEB_PORT = 9000
 
 ALLOWED_HOSTS = ['{{ sentry.server }}']
 
-SENTRY_URL_PREFIX = '{{ sentry.url }}'
 SENTRY_LOGIN_URL = '{{ sentry.url }}/login/'
 
-SENTRY_REDIS_OPTIONS = {
-    'hosts': {
-        0: {
-            'host': '127.0.0.1',
-            'port': 6379,
+SENTRY_OPTIONS['system.url-prefix'] = '{{ sentry.url }}'
+SENTRY_OPTIONS["redis.clusters"] = {
+    'default': {
+        'hosts': {
+            0: {
+                'host': '127.0.0.1',
+                'port': 6379,
+            }
         }
     }
 }
