@@ -4,6 +4,11 @@ from sentry.conf.server import *
 
 ROOT = os.path.dirname(__file__)
 
+INSTALLED_APPS = (
+    "south",
+    "kombu.transport.django",
+)
+
 DATABASES = {
     'default': {
         # You can swap out the engine for MySQL easily by changing this value
