@@ -25,6 +25,7 @@
     - libz-dev
     - libffi-dev
     - libssl-dev
+    - libjpeg-dev
     - python-psycopg2
     - python-pip
     - memcached
