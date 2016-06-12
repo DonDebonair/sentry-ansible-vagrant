@@ -18,8 +18,6 @@ DATABASES = {
     }
 }
 
-SENTRY_KEY = '{{ sentry.secret_key }}'
-
 # Set this to false to require authentication
 SENTRY_PUBLIC = False
 
@@ -33,6 +31,7 @@ ALLOWED_HOSTS = ['{{ sentry.server }}']
 SENTRY_LOGIN_URL = '{{ sentry.url }}/login/'
 
 SENTRY_OPTIONS['system.url-prefix'] = '{{ sentry.url }}'
+SENTRY_OPTIONS['system.secret-key'] = '{{ sentry.secret_key }}'
 SENTRY_OPTIONS["redis.clusters"] = {
     'default': {
         'hosts': {
