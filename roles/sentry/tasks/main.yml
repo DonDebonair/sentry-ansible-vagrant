@@ -33,13 +33,11 @@
     name: celery[redis]
     version: 3.1.19
     virtualenv: /var/sentry/ve
-    virtualenv_site_packages: no
 
 - name: install memcached
   pip:
     name: python-memcached
     virtualenv: /var/sentry/ve
-    virtualenv_site_packages: no
 
 - name: Copy sentry configuration
   template:
@@ -87,4 +85,4 @@
     - restart nginx
     - reload supervisor
 
-- shell: sudo service nginx restart && killall supervisord && sudo supervisord
+- shell: sudo service nginx stop && sleep 3 && sudo service nginx start && sudo service supervisor stop && sudo service supervisor start
