@@ -14,6 +14,16 @@
   yum: pkg=/tmp/epel-release.rpm state=installed
   when: ansible_os_family == 'RedHat'
 
+- name: add pycurl for apt_repository to work
+  apt: name=python-pycurl
+  when: ansible_os_family == "Debian"
+
+- name: add PPA for redis
+  apt_repository: 
+    # This will fail unless Ubuntu ...
+    repo: ppa:chris-lea/redis-server 
+  when: ansible_os_family == "Debian"
+
 - name: install common packages debian/ubuntu
   apt: pkg={{ item }} state=latest
   with_items:
