@@ -2,7 +2,7 @@
 user=sentry
 group=sentry
 command=/var/sentry/ve/bin/sentry --config=/var/sentry/sentry_conf.py start http
-environment=PATH="/var/sentry/ve/bin",HOME="/home/sentry",USER="sentry"
+environment=PATH="/var/sentry/ve/bin",HOME="/var/sentry/home",USER="sentry"
 autostart=true
 autorestart=true
 redirect_stderr=true
@@ -11,8 +11,8 @@ redirect_stderr=true
 [program:celery_beat]
 user=sentry
 group=sentry
-command=/var/sentry/ve/bin/sentry --config=/var/sentry/sentry_conf.py celery beat --pidfile=$HOME/celerybeat.pid
-environment=PATH="/var/sentry/ve/bin",HOME="/home/sentry",USER="sentry"
+command=/var/sentry/ve/bin/sentry --config=/var/sentry/sentry_conf.py run cron --pidfile=$HOME/celerybeat.pid
+environment=PATH="/var/sentry/ve/bin",HOME="/var/sentry/home",USER="sentry"
 autostart=true
 autorestart=true
 redirect_stderr=true
@@ -21,7 +21,7 @@ redirect_stderr=true
 user=sentry
 group=sentry
 command=/var/sentry/ve/bin/sentry --config=/var/sentry/sentry_conf.py celery worker
-environment=PATH="/var/sentry/ve/bin",HOME="/home/sentry",USER="sentry"
+environment=PATH="/var/sentry/ve/bin",HOME="/var/sentry/home",USER="sentry"
 autostart=true
 autorestart=true
 redirect_stderr=true
