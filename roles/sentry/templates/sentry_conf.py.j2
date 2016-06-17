@@ -45,6 +45,13 @@ SENTRY_OPTIONS["redis.clusters"] = {
     }
 }
 
+SENTRY_OPTIONS['mail.from'] = '{{ sentry_mail.username }}'
+SENTRY_OPTIONS['mail.host'] = '{{ sentry_mail.host }}'
+SENTRY_OPTIONS['mail.port'] = {{ sentry_mail.port }}
+SENTRY_OPTIONS['mail.username'] = '{{ sentry_mail.username }}'
+SENTRY_OPTIONS['mail.password'] = '{{ sentry_mail.password }}'
+SENTRY_OPTIONS['mail.use-tls'] = {{ sentry_mail.use_tls }}
+
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
