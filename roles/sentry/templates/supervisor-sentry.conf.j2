@@ -9,9 +9,8 @@ redirect_stderr=true
 
 # See https://docs.getsentry.com/on-premise/server/installation/#configure-supervisord
 [program:celery_beat]
-user=sentry
-group=sentry
-command=/var/sentry/ve/bin/sentry --config=/var/sentry/sentry_conf.py run cron --pidfile=$HOME/celerybeat.pid
+# command=/var/sentry/ve/bin/sentry --config=/var/sentry/sentry_conf.py run cron --pidfile=$HOME/celerybeat.pid
+command=/var/sentry/ve/bin/sentry --config=/var/sentry/sentry_conf.py run cron --pidfile=/var/sentry/home/celerybeat.pid
 environment=PATH="/var/sentry/ve/bin",HOME="/var/sentry/home",USER="sentry"
 autostart=true
 autorestart=true
