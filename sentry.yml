@@ -4,11 +4,11 @@
     db_sentry:
       name: sentry
       user: sentry
-      password: sentry
+      password: redacted
     superuser_sentry:
       username: admin
-      email: admin@example.com
-      password: admin
+      email: redacted
+      password: redacted
     sentry:
       server: redacted
       url: redacted
