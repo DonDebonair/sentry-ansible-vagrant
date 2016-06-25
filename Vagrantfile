@@ -6,7 +6,7 @@ VAGRANTFILE_API_VERSION = "2"
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.define "sentry" do |sentry|
-    sentry.vm.box = "digital_ocean"
+
     ENV['LC_ALL']="en_US.UTF-8"
     ENV['LC_ADDRESS']="en_US.UTF-8"
     ENV['LC_MEASUREMENT']="en_US.UTF-8"
@@ -18,8 +18,14 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     ENV['LC_NAME']="en_US.UTF-8"
     ENV['LC_TELEPHONE']="en_US.UTF-8"
 
-    sentry.ssh.private_key_path = "redacted"
+    sentry.vm.provider :virtualbox do |provider, override|
+      override.vm.box = "precise32"
+      override.vm.box_url = "http://files.vagrantup.com/precise32.box"
+      override.vm.network :private_network, ip: "192.168.33.10"
+    end
+
     sentry.vm.provider :digital_ocean do |provider, override|
+      override.vm.box = "digital_ocean"
       override.ssh.private_key_path = 'redacted'
       provider.client_id = "getsentry"
       provider.token = "redacted"
@@ -32,6 +38,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       ansible.playbook = "sentry.yml"
       ansible.verbose = 'vvv'
     end 
-  end
 
+  end
 end
