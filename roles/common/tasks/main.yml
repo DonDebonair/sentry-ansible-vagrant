@@ -1,5 +1,5 @@
 - name: update apt package cache
-  apt: update_cache=yes
+  apt: update_cache=yes cache_valid_time=3600
   when: ansible_os_family == "Debian"
 
 - name: get epel-repo rpm RHEL6
@@ -14,6 +14,16 @@
   yum: pkg=/tmp/epel-release.rpm state=installed
   when: ansible_os_family == 'RedHat'
 
+- name: add pycurl for apt_repository to work
+  apt: name=python-pycurl
+  when: ansible_os_family == "Debian"
+
+- name: add PPA for redis
+  apt_repository: 
+    # This will fail unless Ubuntu ...
+    repo: ppa:chris-lea/redis-server 
+  when: ansible_os_family == "Debian"
+
 - name: install common packages debian/ubuntu
   apt: pkg={{ item }} state=latest
   with_items:
@@ -25,6 +35,8 @@
     - libz-dev
     - libffi-dev
     - libssl-dev
+    - libjpeg-dev
+    - redis-server
     - python-psycopg2
     - python-pip
     - memcached

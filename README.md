@@ -41,12 +41,12 @@ $ cd /path/to/sentry-ansible-vagrant
 $ vagrant up
 ```
 
-In order to properly access Sentry by its configured hostname (`sentry.server`
+In order to properly access Sentry by its configured hostname (`sentry.local`
 in the `sentry.yml`), you have to add this hostname to your hostsfile.
 On POSIX systems (Linux & OS X), you can add it by doing:
 
 ```
-$ sudo echo "<servername> 192.168.33.10" >> /etc/hosts
+$ sudo echo "192.168.33.10 <servername>" >> /etc/hosts
 ```
 
 ## Different OSes
