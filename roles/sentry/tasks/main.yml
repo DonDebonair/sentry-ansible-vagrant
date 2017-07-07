@@ -45,7 +45,6 @@
     dest: /var/sentry/sentry_conf.py
     owner: sentry
     group: sentry
-  notify: restart nginx
 
 - name: Copy nginx configuration for sentry
   template: 
@@ -75,14 +74,12 @@
 # see http://stackoverflow.com/questions/13702425/source-command-not-found-in-sh-shell
 - shell: /var/sentry/ve/bin/sentry --config=/var/sentry/sentry_conf.py upgrade --noinput
   notify:
-    - restart nginx
     - reload supervisor
 
 # This is a bit of a hack to create a superuser automatically without interactive input. TODO: Create a proper python script for this!
 - name: create admin user
   action: shell source ve/bin/activate && export SENTRY_CONF=/var/sentry/sentry_conf.py && python -c "from sentry.utils.runner import configure; configure(); from django.db import DEFAULT_DB_ALIAS as database; from sentry.models import User; User.objects.db_manager(database).create_superuser('{{ superuser_sentry.username }}', '{{ superuser_sentry.email }}', '{{ superuser_sentry.password }}')" executable=/bin/bash chdir=/var/sentry
   notify:
-    - restart nginx
     - reload supervisor
 
-- shell: sudo service nginx stop && sleep 3 && sudo service nginx start && sudo service supervisor stop && sudo service supervisor start
+- shell: sudo service supervisor stop && sudo service supervisor start
