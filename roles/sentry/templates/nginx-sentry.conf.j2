@@ -2,6 +2,11 @@ server {
     listen 80;
     server_name {{ sentry.server }};
 
+    listen 443 ssl;
+
+    ssl_certificate {{ nginx.cert }};
+    ssl_certificate_key {{ nginx.key }};
+
     location / {
         proxy_pass         http://localhost:9000;
         proxy_redirect     off;

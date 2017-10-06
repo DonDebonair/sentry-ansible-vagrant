@@ -49,3 +49,11 @@
 - name: start the nginx service
   service: name=nginx state=started enabled=yes
 
+- name: Create self-signed certificate
+  command: >
+    openssl req -x509 -nodes -subj '/CN={{ sentry.server }}' -days 365
+    -newkey rsa:4096 -sha256 -keyout {{ nginx.key }} -out {{ nginx.cert }}
+    creates={{ nginx.cert }}
+
+- name: generate Diffie Hellman parameters
+  command: openssl dhparam -out {{ nginx.dhparm }} 2048 creates={{ nginx.dhparm }}

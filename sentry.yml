@@ -4,14 +4,14 @@
     db_sentry:
       name: sentry
       user: sentry
-      password: redacted
+      password: sentry
     superuser_sentry:
       username: admin
-      email: redacted
-      password: redacted
+      email: admin@none.com
+      password: 12345
     sentry:
-      server: redacted
-      url: redacted
+      server: sentry.local
+      url: https://sentry.local
       secret_key: 'redacted'
     sentry_mail:
       host: localhost
@@ -19,6 +19,10 @@
       username: ''
       password: ''
       use_tls: false
+    nginx:
+      key: /etc/ssl/private/server.key
+      cert: /etc/ssl/certs/server.crt
+      dhparm: /etc/ssl/certs/dhparam.pem
   roles:
     - common
     - python
