@@ -16,7 +16,7 @@
 - name: Install the nginx packages 
   apt: name={{ item }} state=present update_cache=yes cache_valid_time=3600
   with_items: ubuntu_pkg
-  environment: env
+  environment: "{{ env }}"
   when: ansible_os_family == "Debian"
 
 - name: Create the directories for site specific configurations
