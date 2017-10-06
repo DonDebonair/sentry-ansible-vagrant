@@ -156,14 +156,14 @@ SENTRY_LOGIN_URL = '{{ sentry.url }}/login/'
 SENTRY_OPTIONS['system.url-prefix'] = '{{ sentry.url }}'
 SENTRY_OPTIONS['system.secret-key'] = '{{ sentry.secret_key }}'
 
-SENTRY_OPTIONS['mail.from'] = '{{ sentry_mail.username }}'
-SENTRY_OPTIONS['mail.host'] = '{{ sentry_mail.host }}'
-SENTRY_OPTIONS['mail.port'] = {{ sentry_mail.port }}
-SENTRY_OPTIONS['mail.username'] = '{{ sentry_mail.username }}'
-SENTRY_OPTIONS['mail.password'] = '{{ sentry_mail.password }}'
-SENTRY_OPTIONS['mail.use-tls'] = {{ sentry_mail.use_tls }}
-SENTRY_OPTIONS['mail.backend'] = 'django.core.mail.backends.smtp.EmailBackend'
-SENTRY_OPTIONS['mail.mailgun-api-key'] = ''
+#SENTRY_OPTIONS['mail.from'] = '{{ sentry_mail.username }}'
+#SENTRY_OPTIONS['mail.host'] = '{{ sentry_mail.host }}'
+#SENTRY_OPTIONS['mail.port'] = {{ sentry_mail.port }}
+#SENTRY_OPTIONS['mail.username'] = '{{ sentry_mail.username }}'
+#SENTRY_OPTIONS['mail.password'] = '{{ sentry_mail.password }}'
+#SENTRY_OPTIONS['mail.use-tls'] = {{ sentry_mail.use_tls }}
+#SENTRY_OPTIONS['mail.backend'] = 'django.core.mail.backends.smtp.EmailBackend'
+#SENTRY_OPTIONS['mail.mailgun-api-key'] = ''
 
 SENTRY_OPTIONS["redis.clusters"] = {
     'default': {
