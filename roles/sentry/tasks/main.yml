@@ -82,10 +82,17 @@
   notify:
     - reload supervisor
 
+- name: Does super user exists already?
+  action: shell source ve/bin/activate && export SENTRY_CONF=/var/sentry/sentry_conf.py && python -c "from sentry.utils.runner import configure; configure(); from django.db import DEFAULT_DB_ALIAS as database; from sentry.models import User;from django.contrib.auth import get_user_model; User = get_user_model(); print(User.objects.filter(username='{{ superuser_sentry.username }}').count()>0)" executable=/bin/bash chdir=/var/sentry
+  register: superuser_exists
+
 # This is a bit of a hack to create a superuser automatically without interactive input. TODO: Create a proper python script for this!
 - name: create admin user
   action: shell source ve/bin/activate && export SENTRY_CONF=/var/sentry/sentry_conf.py && python -c "from sentry.utils.runner import configure; configure(); from django.db import DEFAULT_DB_ALIAS as database; from sentry.models import User; User.objects.db_manager(database).create_superuser('{{ superuser_sentry.username }}', '{{ superuser_sentry.email }}', '{{ superuser_sentry.password }}')" executable=/bin/bash chdir=/var/sentry
   notify:
     - reload supervisor
+  when: not superuser_exists
 
-- shell: sudo service supervisor stop && sudo service supervisor start
+- name: restart supervisor
+  become: yes
+  action: shell service supervisor stop && service supervisor start

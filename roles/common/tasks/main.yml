@@ -15,9 +15,15 @@
   when: ansible_os_family == "Debian"
 
 - name: add PPA for redis
-  apt_repository: 
+  apt_repository:
     # This will fail unless Ubuntu ...
     repo: ppa:chris-lea/redis-server 
+  when: ansible_os_family == "Debian"
+
+- name: add PPA for Ansible
+  apt_repository:
+    # This will fail unless Ubuntu ...
+    repo: ppa:ansible/ansible
   when: ansible_os_family == "Debian"
 
 - name: update apt package cache
@@ -40,6 +46,8 @@
     - python-psycopg2
     - python-pip
     - memcached
+    - software-properties-common
+    - ansible
   when: ansible_os_family == "Debian"
 
 # @development is a groupinstall, see https://coderwall.com/p/k6goya
