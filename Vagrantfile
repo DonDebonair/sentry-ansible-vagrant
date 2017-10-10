@@ -19,7 +19,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     ENV['LC_TELEPHONE']="en_US.UTF-8"
 
     sentry.vm.provider :virtualbox do |provider, override|
-      override.vm.box = "ubuntu/trusty64"
+      override.vm.box = "ubuntu/xenial64"
       override.vm.network :private_network, ip: "192.168.33.10"
     end
 

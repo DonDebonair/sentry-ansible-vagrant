@@ -93,6 +93,9 @@
     - reload supervisor
   when: not superuser_exists
 
-- name: restart supervisor
-  become: yes
-  action: shell service supervisor stop && service supervisor start
+- name: stop supervisor
+  service: name=supervisor state=stopped
+
+- name: start supervisor
+  service: name=supervisor state=started
+

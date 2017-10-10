@@ -1,5 +1,14 @@
 - hosts: all
   become: yes
+  gather_facts: False
+  pre_tasks:
+# This task is needed for Ubuntu Xenial
+    - name: Install python for Ansible
+      raw: test -e /usr/bin/python || (apt -y update && apt install -y python-simplejson)
+      register: output
+      changed_when: output.stdout != ""
+      tags: always
+    - setup: # aka gather_facts
   vars:
     db_sentry:
       name: sentry
