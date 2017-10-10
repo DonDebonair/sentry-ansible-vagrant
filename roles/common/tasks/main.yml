@@ -1,7 +1,3 @@
-- name: update apt package cache
-  apt: update_cache=yes cache_valid_time=3600
-  when: ansible_os_family == "Debian"
-
 - name: get epel-repo rpm RHEL6
   get_url: dest=/tmp/epel-release.rpm  url=http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm
   when: ansible_os_family == 'RedHat' and ansible_distribution_version|int == 6
@@ -19,9 +15,19 @@
   when: ansible_os_family == "Debian"
 
 - name: add PPA for redis
-  apt_repository: 
+  apt_repository:
     # This will fail unless Ubuntu ...
     repo: ppa:chris-lea/redis-server 
+  when: ansible_os_family == "Debian"
+
+- name: add PPA for Ansible
+  apt_repository:
+    # This will fail unless Ubuntu ...
+    repo: ppa:ansible/ansible
+  when: ansible_os_family == "Debian"
+
+- name: update apt package cache
+  apt: update_cache=yes cache_valid_time=3600
   when: ansible_os_family == "Debian"
 
 - name: install common packages debian/ubuntu
@@ -40,6 +46,8 @@
     - python-psycopg2
     - python-pip
     - memcached
+    - software-properties-common
+    - ansible
   when: ansible_os_family == "Debian"
 
 # @development is a groupinstall, see https://coderwall.com/p/k6goya

@@ -1,16 +1,18 @@
-import os.path
-
+# This file is just Python, with a touch of Django which means
+# you can inherit and tweak settings to your hearts content.
 from sentry.conf.server import *
 
-ROOT = os.path.dirname(__file__)
+import os.path
+
+CONF_ROOT = os.path.dirname(__file__)
 
 DATABASES = {
     'default': {
-        'ENGINE': 'sentry.db.postgresql',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': '{{ db_sentry.name }}',
         'USER': '{{ db_sentry.user }}',
         'PASSWORD': '{{ db_sentry.password }}',
-        'HOST': '',
+        'HOST': 'localhost',
         'PORT': '',
     }
 }
@@ -28,8 +30,9 @@ SENTRY_USE_BIG_INTS = True
 
 # Instruct Sentry that this install intends to be run by a single organization
 # and thus various UI optimizations should be enabled.
-SENTRY_SINGLE_ORGANIZATION = True
+#SENTRY_SINGLE_ORGANIZATION = True
 DEBUG = False
+SENTRY_FEATURES['auth:register'] = False
 
 #########
 # Cache #
@@ -38,12 +41,17 @@ DEBUG = False
 # Sentry currently utilizes two separate mechanisms. While CACHES is not a
 # requirement, it will optimize several high throughput patterns.
 
-CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
-        'LOCATION': ['127.0.0.1:11211'],
-    }
-}
+# If you wish to use memcached, install the dependencies and adjust the config
+# as shown:
+#
+#   pip install python-memcached
+#
+# CACHES = {
+#     'default': {
+#         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+#         'LOCATION': ['127.0.0.1:11211'],
+#     }
+# }
 
 # A primary cache is required for things such as processing events
 SENTRY_CACHE = 'sentry.cache.redis.RedisCache'
@@ -116,7 +124,6 @@ SENTRY_FILESTORE_OPTIONS = {
     'location': '/tmp/sentry-files',
 }
 
-
 ##############
 # Web Server #
 ##############
@@ -142,19 +149,21 @@ SENTRY_WEB_OPTIONS = {
 SENTRY_PUBLIC = False
 SENTRY_FEATURES['auth:register'] = False
 
-ALLOWED_HOSTS = ['{{ sentry.server }}']
+ALLOWED_HOSTS = ['*']
 
 SENTRY_LOGIN_URL = '{{ sentry.url }}/login/'
 
 SENTRY_OPTIONS['system.url-prefix'] = '{{ sentry.url }}'
 SENTRY_OPTIONS['system.secret-key'] = '{{ sentry.secret_key }}'
 
-SENTRY_OPTIONS['mail.from'] = '{{ sentry_mail.username }}'
-SENTRY_OPTIONS['mail.host'] = '{{ sentry_mail.host }}'
-SENTRY_OPTIONS['mail.port'] = {{ sentry_mail.port }}
-SENTRY_OPTIONS['mail.username'] = '{{ sentry_mail.username }}'
-SENTRY_OPTIONS['mail.password'] = '{{ sentry_mail.password }}'
-SENTRY_OPTIONS['mail.use-tls'] = {{ sentry_mail.use_tls }}
+#SENTRY_OPTIONS['mail.from'] = '{{ sentry_mail.username }}'
+#SENTRY_OPTIONS['mail.host'] = '{{ sentry_mail.host }}'
+#SENTRY_OPTIONS['mail.port'] = {{ sentry_mail.port }}
+#SENTRY_OPTIONS['mail.username'] = '{{ sentry_mail.username }}'
+#SENTRY_OPTIONS['mail.password'] = '{{ sentry_mail.password }}'
+#SENTRY_OPTIONS['mail.use-tls'] = {{ sentry_mail.use_tls }}
+#SENTRY_OPTIONS['mail.backend'] = 'django.core.mail.backends.smtp.EmailBackend'
+#SENTRY_OPTIONS['mail.mailgun-api-key'] = ''
 
 SENTRY_OPTIONS["redis.clusters"] = {
     'default': {

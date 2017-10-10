@@ -1,3 +1,5 @@
 ### Vagrant ###
 .vagrant/
 vagrant_ansible_inventory*
+Customfile
+*.log

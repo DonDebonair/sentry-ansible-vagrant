@@ -16,7 +16,7 @@
 - name: Install the nginx packages 
   apt: name={{ item }} state=present update_cache=yes cache_valid_time=3600
   with_items: ubuntu_pkg
-  environment: env
+  environment: "{{ env }}"
   when: ansible_os_family == "Debian"
 
 - name: Create the directories for site specific configurations
@@ -49,3 +49,11 @@
 - name: start the nginx service
   service: name=nginx state=started enabled=yes
 
+- name: Create self-signed certificate
+  command: >
+    openssl req -x509 -nodes -subj '/CN={{ sentry.server }}' -days 365
+    -newkey rsa:4096 -sha256 -keyout {{ nginx.key }} -out {{ nginx.cert }}
+    creates={{ nginx.cert }}
+
+- name: generate Diffie Hellman parameters
+  command: openssl dhparam -out {{ nginx.dhparm }} 2048 creates={{ nginx.dhparm }}

@@ -43,7 +43,8 @@
   pip: name=psycopg2
 
 - name: setup database
-  sudo_user: postgres
+  become: yes
+  become_user: postgres
   postgresql_db:
     db: "{{ db_sentry.name }}"
     encoding: 'UTF-8'
@@ -53,7 +54,8 @@
     state: present
 
 - name: grant access for database to user
-  sudo_user: postgres
+  become: yes
+  become_user: postgres
   postgresql_user:
     db: "{{ db_sentry.name }}"
     user: "{{ db_sentry.user }}"

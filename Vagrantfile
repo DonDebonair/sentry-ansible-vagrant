@@ -19,7 +19,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     ENV['LC_TELEPHONE']="en_US.UTF-8"
 
     sentry.vm.provider :virtualbox do |provider, override|
-      override.vm.box = "ubuntu/trusty64"
+      override.vm.box = "ubuntu/xenial64"
       override.vm.network :private_network, ip: "192.168.33.10"
     end
 
@@ -37,6 +37,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       ansible.playbook = "sentry.yml"
       ansible.verbose = 'vvv'
     end 
-
   end
+
+  config.vm.provider "virtualbox" do |vb|
+    vb.memory = 1024
+    vb.cpus = 4
+  end
+
 end
